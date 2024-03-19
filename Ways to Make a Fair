@@ -1,0 +1,51 @@
+class Solution {
+    public int waysToMakeFair(int[] nums) {
+        int n = nums.length;
+        int fairCount = 0;
+        int evenSum = 0, oddSum = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                evenSum += nums[i];
+            } else {
+                oddSum += nums[i];
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                evenSum -= nums[i];
+            } else {
+                oddSum -= nums[i];
+            }
+
+            if (evenSum + oddSum == evenSum * 2) {
+                fairCount++;
+            }
+
+            if (i % 2 == 0) {
+                evenSum += nums[i];
+            } else {
+                oddSum += nums[i];
+            }
+        }
+
+        return fairCount;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        int[] nums1 = {2, 1, 6, 4};
+        System.out.println(solution.waysToMakeFair(nums1)); 
+
+        int[] nums2 = {1, 1, 1};
+        System.out.println(solution.waysToMakeFair(nums2)); 
+
+        int[] nums3 = {1, 2, 3};
+        System.out.println(solution.waysToMakeFair(nums3)); 
+    }
+}
+  
+
+### Sir in my code only 1 test case is working remaining im not getting
