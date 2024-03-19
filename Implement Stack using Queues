@@ -1,0 +1,50 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class MyStack {
+    private Queue<Integer> queue1;
+    private Queue<Integer> queue2;
+    private int topElement;
+
+    public MyStack() {
+        queue1 = new LinkedList<>();
+        queue2 = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        // Push element to queue2 and update topElement
+        queue2.offer(x);
+        topElement = x;
+        
+        // Move all elements from queue1 to queue2
+        while (!queue1.isEmpty()) {
+            queue2.offer(queue1.poll());
+        }
+        
+        // Swap queue1 and queue2
+        Queue<Integer> temp = queue1;
+        queue1 = queue2;
+        queue2 = temp;
+    }
+    
+    public int pop() {
+        // Pop the top element from queue1
+        int popped = queue1.poll();
+        
+        // Update topElement if queue1 is not empty
+        if (!queue1.isEmpty())
+            topElement = queue1.peek();
+        
+        return popped;
+    }
+    
+    public int top() {
+        // Return the top element
+        return topElement;
+    }
+    
+    public boolean empty() {
+        // Check if queue1 is empty
+        return queue1.isEmpty();
+    }
+}
