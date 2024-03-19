@@ -1,0 +1,44 @@
+import java.util.Stack;
+
+class MyQueue {
+    // Two stacks to simulate the queue behavior
+    private Stack<Integer> enqueueStack; // Stack for enqueueing elements
+    private Stack<Integer> dequeueStack; // Stack for dequeueing elements
+
+    // Constructor to initialize the stacks
+    public MyQueue() {
+        enqueueStack = new Stack<>();
+        dequeueStack = new Stack<>();
+    }
+
+    // Method to enqueue (push) an element into the queue
+    public void push(int x) {
+        enqueueStack.push(x); // Simply push the element into the enqueue stack
+    }
+
+    // Method to dequeue (pop) an element from the queue
+    public int pop() {
+        if (dequeueStack.isEmpty())
+            transferElements(); // If dequeue stack is empty, transfer elements from enqueue stack
+        return dequeueStack.pop(); // Pop the top element from the dequeue stack
+    }
+
+    // Method to peek (get the front element) of the queue
+    public int peek() {
+        if (dequeueStack.isEmpty())
+            transferElements(); // If dequeue stack is empty, transfer elements from enqueue stack
+        return dequeueStack.peek(); // Peek the top element from the dequeue stack
+    }
+
+    // Method to check if the queue is empty
+    public boolean empty() {
+        return enqueueStack.isEmpty() && dequeueStack.isEmpty(); // If both stacks are empty, the queue is empty
+    }
+
+    // Method to transfer elements from the enqueue stack to the dequeue stack
+    private void transferElements() {
+        while (!enqueueStack.isEmpty()) {
+            dequeueStack.push(enqueueStack.pop()); // Pop elements from enqueue stack and push them onto dequeue stack
+        }
+    }
+}
