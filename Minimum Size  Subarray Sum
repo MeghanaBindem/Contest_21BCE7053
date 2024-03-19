@@ -1,0 +1,21 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int left = 0; // Left pointer of the sliding window
+        int sum = 0; // Current sum of elements in the window
+        int minLen = Integer.MAX_VALUE; // Initialize the minimal length of the subarray
+        
+        // Iterate through the array using the right pointer as the boundary of the sliding window
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right]; // Add the current element to the sum
+            
+            // Shrink the window from the left side until the sum is less than target
+            while (sum >= target) {
+                minLen = Math.min(minLen, right - left + 1); // Update the minimal length
+                sum -= nums[left++]; // Remove the leftmost element from the sum
+            }
+        }
+        
+        // If minLen is still Integer.MAX_VALUE, it means no subarray was found
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
+}
