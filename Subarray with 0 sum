@@ -1,0 +1,30 @@
+class Solution{
+    static boolean findsum(int arr[],int n)
+    {
+        HashSet<Integer> prefixSums = new HashSet<>();
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            
+            if (sum == 0 || prefixSums.contains(sum))
+                return true;
+            
+            prefixSums.add(sum);
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        int[] arr1 = {4, 2, -3, 1, 6};
+        int n1 = 5;
+        System.out.println(solution.findsum(arr1, n1));
+
+        int[] arr2 = {4, 2, 0, 1, 6};
+        int n2 = 5;
+        System.out.println(solution.findsum(arr2, n2));
+    }
+}
