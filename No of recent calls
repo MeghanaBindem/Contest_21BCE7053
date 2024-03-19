@@ -1,0 +1,26 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+class RecentCounter {
+    // Queue to store the timestamps of recent requests
+    private Queue<Integer> requests;
+
+    // Constructor to initialize the queue
+    public RecentCounter() {
+        requests = new LinkedList<>();
+    }
+    
+    // Method to record a new request and return the number of requests within the last 3000 milliseconds
+    public int ping(int t) {
+        // Add the timestamp of the new request to the queue
+        requests.offer(t);
+        
+        // Remove timestamps that are older than 3000 milliseconds
+        while (!requests.isEmpty() && requests.peek() < t - 3000) {
+            requests.poll();
+        }
+        
+        // Return the number of remaining requests in the queue
+        return requests.size();
+    }
+}
