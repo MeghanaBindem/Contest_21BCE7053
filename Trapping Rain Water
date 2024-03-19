@@ -1,0 +1,50 @@
+class Solution {
+    // Method to calculate the total amount of water trapped
+    public int trap(int[] arr) {
+        int n = arr.length;
+        if (n <= 2)
+            return 0;
+        
+        int[] left = calculateLeftMax(arr); // Calculate maximum height of bars to the left
+        int[] right = calculateRightMax(arr); // Calculate maximum height of bars to the right
+        
+        int sum = 0;
+        
+        // Calculate trapped water for each bar
+        for (int i = 0; i < n; i++) {
+            int waterLevel = Math.min(left[i], right[i]);
+            int trappedWater = waterLevel - arr[i];
+            if (trappedWater > 0) {
+                sum += trappedWater;
+            }
+        }
+        
+        return sum;
+    }
+    
+    // Method to calculate maximum height of bars to the left of each bar
+    private int[] calculateLeftMax(int[] arr) {
+        int n = arr.length;
+        int[] left = new int[n];
+        left[0] = arr[0];
+        
+        for (int i = 1; i < n; i++) {
+            left[i] = Math.max(left[i - 1], arr[i]);
+        }
+        
+        return left;
+    }
+    
+    // Method to calculate maximum height of bars to the right of each bar
+    private int[] calculateRightMax(int[] arr) {
+        int n = arr.length;
+        int[] right = new int[n];
+        right[n - 1] = arr[n - 1];
+        
+        for (int i = n - 2; i >= 0; i--) {
+            right[i] = Math.max(right[i + 1], arr[i]);
+        }
+        
+        return right;
+    }
+}
