@@ -1,0 +1,15 @@
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        double k= (double)n; 
+        while(k>1){
+            k=k/4;
+        }
+        if(k==1){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    }
+}
